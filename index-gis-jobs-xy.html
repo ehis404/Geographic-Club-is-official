@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Intro to PopupTemplate | Sample | ArcGIS Maps SDK for JavaScript 4.29</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.29/"></script>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/layers/FeatureLayer",
+        "esri/views/MapView",
+        "esri/config"
+      ], (Map, FeatureLayer, MapView,esriConfig) => {
+        esriConfig.apiKey = "AAPK68317560676e48a7a9a3a0382e8a2b63EaOmv1IuJY_DLYgcIz1qXcrgAS6H8hpi6dcoJ0Ta_zQqtju5IfLgMY9ItWVS4Sxk";
+        const map = new Map({
+          basemap: "topo-vector"
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [39, 21],
+          zoom: 10
+        });
+
+        const template = {
+          title: "{NAME}",
+          content: [
+            {
+              type: "fields",
+              fieldInfos: [
+                {
+                  fieldName: "type",
+                  label: "نوع القطاع"
+                },
+                {
+                  fieldName: "desc",
+                  label: "نبذة عن المؤسسة",
+                }
+              ]
+            }
+          ]
+        };
+
+
+        const featureLayer = new FeatureLayer({
+          url: "https://services8.arcgis.com/NZJbS1CE1QXUjgzY/arcgis/rest/services/json_ofs_up/FeatureServer/0",
+          popupTemplate: template
+        });
+        map.add(featureLayer);
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>

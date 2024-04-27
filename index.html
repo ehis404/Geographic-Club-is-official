@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" dir='rtl' >
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="img/logo.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Jan 29 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="img/logo.png" alt="">
+        <span class="d-none d-lg-block">Geographic Club</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+        
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>الصفحه الرئيسه</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-buttowide"></i><span>خرائط تفاعليه</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="https://developers.arcgis.com/javascript/latest/sample-code/satellites-3d/live/">
+              <i class="bi bi-circle"></i><span>دوران الاقمار الصناعيه حول الارض 3D</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://developers.arcgis.com/javascript/latest/sample-code/mars/live/">
+              <i class="bi bi-circle"></i><span>الفوهات على سطح المريخ 3D</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://developers.arcgis.com/javascript/latest/sample-code/layers-csv-projection/live/">
+              <i class="bi bi-circle"></i><span>الاعاصير منذ عام 1955-2020</span>
+            </a>
+          </li>
+       
+          <li>
+            <a href="esri-request.html">
+              <i class="bi bi-circle"></i><span>طلب بيانات من خادم ايزري</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      
+
+    
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index-tree-view.html">
+          <i class="bi bi-person"></i>
+          <span>هيكلة النادي</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      
+
+    </ul>
+
+
+  </aside><!-- End Sidebar-->
+
+
+  <main id="main" class="main">
+
+
+
+    <section class="section dashboard">
+      <div class="row">
+        
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+        <!--main baner-->
+         <!-- End Page Title -->
+
+
+
+            <!--العفسه فس البانر الاول هنا في الكلاس اللي تحت الملاحظه ذي-->
+            <div class="main-baner">
+              <div class="card info-card revenue-card">
+                <div class="filter"></div>
+                <div class="card-body">
+                  <h5 class="card-title-1">اسبوع البيئة<span></span></h5>
+                  <div class="d-flex align-items-center">
+
+                    <div class="ps-3">
+                      <span class="text-success small pt-1 fw-bold"></span> هو مناسبة وطنية بيئية معتمدة بقرار مجلس الوزراء رقم (٤٥٥) بتاريخ ١٤٣٩/٨/٢٢ هـ، حيث تهدف إلى نشر الوعي البيئي المجتمعي وتحقيق الإستدامة البيئية والمحافظة على الموارد الطبيعية والحد من التلوث بمختلف أنواعه، ويتم تنفيذ الكثير من الفعاليات والبرامج والمبادرات خلال هذا الأسبوع في كافة أنحاء المملكة<span class="text-muted small pt-2 ps-1"></span>
+                    </div>
+                  </div>
+                </div>
+                <br></br>
+                <a href="Green-map.html" class="button custom-button">استكشف خريطتنا الجديدة لعداد الأشجار في كل المحافظات</a>
+ <!-- New class added -->
+              </div>
+            </div>
+            
+          <iframe class="map-frame" src="index-flow.html" frameborder="0" allowfullscreen></iframe>
+
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
+
+                <div class="filter">
+                </div>
+
+                <div class="card-body pb-0">
+                  <h5 class="card-title">بيانات مجانية للتنزيل</h5>
+
+                  <table class="table table-borderless">
+                    <tbody>
+                    <a href="https://www.mediafire.com/file/peu874f7wljkvju/الحدود_السياسيه_للعالم.rar/file" class="text-primary fw-bold">Shapfile للحدود السياسيه في العالم</a>
+                     <br></br>
+                     <a href="https://www.mediafire.com/file/yp90ft4xwetp4qq/General_Layers_KSA.gdb.rar/file" class="text-primary fw-bold">قاعدة البيانات العامه للمملكه العربيه السعوديه </a>
+                     <br></br>
+                     <a href="https://www.mediafire.com/file/obydp10r5qb0p73/%25D8%25A7%25D8%25B7%25D9%2584%25D8%25B3_%25D8%25A7%25D9%2584%25D8%25AE%25D8%25B1%25D8%25A7%25D8%25A6%25D8%25B7_%25D8%25A7%25D9%2584%25D8%25B7%25D8%25A8%25D9%2588%25D8%25BA%25D8%25B1%25D8%25A7%25D9%2581%25D9%258A%25D9%2587_%25D8%25A7%25D9%2584%25D8%25B3%25D8%25B9%25D9%2588%25D8%25AF%25D9%258A%25D9%2587.rar/file" class="text-primary fw-bold">اطلس الخرائط الطبوغرافيه السعوديه</a>
+                      <br></br>
+                     <td><a href="https://www.mediafire.com/file/qsbpubfqh8nnh8d/ملف+تحميل+الخرائط+الطبوغرافية+العسكرية+الامريكية.rar/file" class="text-primary fw-bold">ملف KML لكل الخرائط الطبوغرافيه في العالم</a></td>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Top Selling -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <!-- Recent Activity -->
+          <div class="card">
+            <div class="filter">
+
+                
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">ابرز انجازاتنا<span></span></h5>
+
+              <div class="activity">
+
+                <div class="activity-item d-flex">
+                  <div class="activite-label"></div>
+                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                  <div class="activity-content">
+                   تقديم مختلف الدورات  الحضوريه و الاونلاين <a href="#" class="fw-bold text-dark"></a>
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+                  <div class="activite-label"></div>
+                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                  <div class="activity-content">
+                    انجاز خارطة تفاعليه للاماكن التي تقوم بتوظيف و تدريب خريجين نظم المعلومات الجغرافيه
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+                  <div class="activite-label"></div>
+                  <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+                  <div class="activity-content">
+                  حضور و تغطية مختلف النشاطات المعنيه بالمجتمع
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+                  <div class="activite-label"></div>
+                  <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
+                  <div class="activity-content">
+                   توفير مختلف المواد العلميه للباحثين و الطلبه <a href="#" class="fw-bold text-dark"></a> 
+                  </div>
+                </div><!-- End activity item-->
+
+                <div class="activity-item d-flex">
+                  <div class="activite-label"></div>
+                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                  <div class="activity-content">
+                    حورات مع كبار متخصصين نظم المعلومات الجغرافيه
+                  </div>
+                </div><!-- End activity item-->
+
+<!-- End activity item-->
+              </div>
+            </div>
+          </div><!-- End Recent Activity -->
+
+          <!-- Budget Report -->
+          <!-- End Budget Report -->
+
+          <!-- Website Traffic -->
+          <div class="card">
+            <div class="filter">
+              
+
+            </div>
+
+            <div class="card-body pb-0">
+              <h5 class="card-title">انجازاتنا بالارقام<span></span></h5>
+
+              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  echarts.init(document.querySelector("#trafficChart")).setOption({
+                    tooltip: {
+                      trigger: 'item'
+                    },
+                    legend: {
+                      top: '5%',
+                      left: 'center'
+                    },
+                    series: [{
+                      name: 'Access From',
+                      type: 'pie',
+                      radius: ['40%', '70%'],
+                      avoidLabelOverlap: false,
+                      label: {
+                        show: false,
+                        position: 'center'
+                      },
+                      emphasis: {
+                        label: {
+                          show: true,
+                          fontSize: '18',
+                          fontWeight: 'bold'
+                        }
+                      },
+                      labelLine: {
+                        show: false
+                      },
+                      data: [{
+                          value: 2,
+                          name: 'مسابقة'
+                        },
+                        {
+                          value: 4,
+                          name: 'لقاء'
+                        },
+                        {
+                          value: 6,
+                          name: 'دورة'
+                        },
+                        {
+                          value: 2,
+                          name: 'فعالية'
+                        },
+                        {
+                          value: 1,
+                          name: 'تطوع'
+                        }
+                      ]
+                    }]
+                  });
+                });
+              </script>
+
+            </div>
+          </div><!-- End Website Traffic -->
+
+          <!-- News & Updates Traffic -->
+          <div class="card">
+            <div class="filter">
+            </div>
+
+            <div class="card-body pb-0">
+              <h5 class="card-title">روابط تحميل برامج </h5>
+
+              <div class="news">
+
+                <div class="post-item clearfix">
+                  <a href="https://qgis.org/en/site/forusers/download.html">
+                      <img src="assets/img/qgis-icon64.svg" alt="QGIS Icon">
+                  </a>
+                  <h4><a href="https://qgis.org/en/site/forusers/download.html">برنامج QGIS</a></h4>
+                  <p>برنامج تحليل ومعالجة للبيانات الجغرافية مجاني ومفتوح المصدر</p>
+              </div>
+              
+
+              <div class="post-item clearfix">
+                <a href="https://www.google.com/earth/about/versions/">
+                    <img src="assets/img/google-earth-pro.svg" alt="Google Earth Pro Logo">
+                </a>
+                <h4><a href="https://www.google.com/earth/about/versions/">برنامج Google Earth Pro</a></h4>
+                <p>برنامج يسمح بتصفح البيانات المكانية واستعراضها واستخراج الصور الجوية وهو ليس برنامج GIS فعلي</p>
+            </div>
+          </div>
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="filter">
+            </div>
+
+            <div class="card-body pb-0">
+              <h5 class="card-title">مواقع تحميل خرائط</h5>
+
+              <div class="news">
+
+                <div class="post-item clearfix">
+                  <img src="assets/img/University_of_Texas_at_Austin_seal (1).svg" alt="">
+                  <h4><a href="https://maps.lib.utexas.edu/maps/topo/">ارشيف جامعة تكساس</a></h4>
+                  <p>يوجد في ارشيف جامعة تيكساس العديد من الخرائط الطبوغرافيه و الجيولوجيه بدقه عاليه</p>
+                </div>
+
+                <div class="post-item clearfix">
+                  <img src="img/davidrumsey.jpg" alt="">
+                  <h4><a href="https://www.davidrumsey.com/">david rumsey</a></h4>
+                  <p>موقع متخصص بالخرائط القديمه</p>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      
+    </section>
+
+  </main>
+
+  <script>
+  </script>
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; م مهند الزهراني <strong><span>النادي الجغرافي </span></strong>. الجمعيه الجغرافيه السعوديه
+    </div>
+    <div class="credits">
+
+      <a href="https://twitter.com/up_702">X:up_702</a>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

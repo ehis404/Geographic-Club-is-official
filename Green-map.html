@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Query features from a FeatureLayerView | Sample | ArcGIS Maps SDK for JavaScript 4.28</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
+  <style>
+    html, body, #sceneDiv {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .panel-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel-side {
+      padding: 2px;
+      box-sizing: border-box;
+      width: 400px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.6);
+      overflow: auto;
+      z-index: 60;
+    }
+
+    .panel-side h3 {
+      padding: 0 20px;
+      margin: 20px 0;
+    }
+
+    .panel-side ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .panel-side li {
+      list-style: none;
+      padding: 10px 20px;
+    }
+
+    .panel-result {
+      cursor: pointer;
+      margin: 2px 0;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .panel-result:hover,
+    .panel-result:focus {
+      color: #ffffff;
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    .esri-layer-list {
+    padding: calc(var(--esri-widget-padding-y)*.5)calc(var(--esri-widget-padding-x)*.5);
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    flex-flow: column;
+    display: flex;
+    overflow-y: auto;
+}
+.esri-layer-list__item {
+  background-color: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid #ffffff4d;
+    margin: 3px 0;
+    padding: 0;
+    list-style: none;
+    transition: background-color .125s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+.esri-widget--button {
+    cursor: pointer;
+    text-align: center;
+
+    background-color: rgba(0, 0, 0, 0.4); /* زيادة شفافية الخلفية */
+    flex-flow: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    overflow: hidden;
+}
+.esri-widget {
+    --esri-widget-padding-x: 15px;
+    --esri-widget-padding-y: 12px;
+    --esri-widget-padding: var(--esri-widget-padding-y)var(--esri-widget-padding-x);
+    box-sizing: border-box;
+    color: rgb(11, 233, 237);
+    background-color: rgba(0, 0, 0, 0.4);
+    font-family: Avenir Next,Helvetica Neue,helvetica,arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.3em;
+}
+.esri-input {
+    color: #d0ff00;
+    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
+    font-family: Avenir Next,Helvetica Neue,helvetica,arial,sans-serif;
+    font-size: 14px;
+}
+.esri-search {
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    width: 380px;
+    display: flex;
+    overflow: visible;
+}
+body .esri-attribution {
+    background-color: rgba(0, 0, 0, 0) !important;
+    width: 2000px;
+
+}
+.esri-attribution__sources {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1 0;
+    align-self: flex-start;
+    padding: 0 5px;
+    font-weight: 300;
+    overflow: hidden;
+    position: absolute; /* Position the element absolutely */
+    bottom: 0; /* Position at the bottom */
+    align-items: center;
+}
+
+.legend-container {
+  display: flex;
+  flex-direction: row; /* اتجاه افتراضي */
+}
+
+  </style>
+</head>
+<body>
+  <div class="panel-container">
+    <div class="panel-side esri-widget"> 
+      <h3>التشجير في مناطق المملكه العربيه السعوديه</h3>
+      <div id="searchWidget"><h4>البحث</h4></div>
+      <div id="layerList"><h4>قائمة المحتويات</h4></div>
+      <h4>المناطق</h4><ul id="nyc_graphics">
+        <li>جاري تحميل المحتوى&hellip;</li>
+      </ul>
+    </div>
+    <div id="sceneDiv"></div>
+  </div>
+
+  <script src="https://js.arcgis.com/4.28/"></script>
+
+  
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/LayerList",
+      "esri/widgets/ScaleBar",
+      "esri/config",
+      "esri/core/reactiveUtils",
+      "esri/widgets/Search",
+      "esri/widgets/Expand",
+        "esri/widgets/BasemapGallery",
+        "esri/widgets/Legend",
+    ], (
+      Map,
+      MapView,
+      FeatureLayer,
+      LayerList,
+      ScaleBar,
+      esriConfig,
+      reactiveUtils,
+      Search,
+      Expand,
+       BasemapGallery,
+       Legend,
+      
+    ) => {
+      (async () => {
+        // Add your ArcGIS API Key here
+        esriConfig.apiKey = "AAPK68317560676e48a7a9a3a0382e8a2b63EaOmv1IuJY_DLYgcIz1qXcrgAS6H8hpi6dcoJ0Ta_zQqtju5IfLgMY9ItWVS4Sxk";
+
+        const map = new Map({
+          basemap: "dark-gray-vector"
+        });
+
+        const view = new MapView({
+          container: "sceneDiv",
+          map: map,
+          center: [45, 25],
+          zoom: 5,
+          padding: {
+            right: 300
+          }
+        });
+        const basemapGallery = new BasemapGallery({
+  view: view,
+  container: document.createElement("div")
+});
+
+// Create an Expand instance and set the content
+// property to the DOM node of the basemap gallery widget
+
+const bgExpand = new Expand({
+  view: view,
+  content: basemapGallery
+});
+
+// Add the expand instance to the ui
+
+view.ui.add(bgExpand, "top-left");
+
+
+let legend = new Legend({
+  view: view
+});
+
+view.ui.add(legend, "bottom-left");
+
+      
+
+        view.when(() => {
+          const layerList = new LayerList({
+            view: view
+          });
+          view.ui.add(layerList, "top-right");
+          document.getElementById('layerList').appendChild(layerList.container); // Move this line here
+        });
+        const searchWidget = new Search({
+          view: view
+        });
+        view.ui.add(searchWidget, { position: "top-right" });
+        document.getElementById('searchWidget').appendChild(searchWidget.container); // Move this line here
+        const scaleBar = new ScaleBar({ view: view });
+        view.ui.add(scaleBar, "bottom-left");
+
+        const listNode = document.getElementById("nyc_graphics");
+
+        const popupTemplate = {
+          title: "{Name} منطقة {Prov_name}",
+          content: [
+            {
+              type: "fields",
+              fieldInfos: [
+                { fieldName: "Prov_name", label: "اسم المنطقة", format: { places: 0, digitSeparator: true } },
+                { fieldName: "Tree", label: "عدد الاشجار", format: { places: 0, digitSeparator: true } }
+              ]
+            }
+          ]
+        };
+
+
+        const defaultSym = {
+  type: "simple-fill",
+  color: "#cccccc", // default color
+  outline: {
+    color: "#000000",
+    width: 1
+  }
+};
+
+const featureLayer = new FeatureLayer({
+  url: "https://services8.arcgis.com/NZJbS1CE1QXUjgzY/arcgis/rest/services/green_saudi/FeatureServer/0",
+  outFields: ["*"], // Include all fields
+  popupTemplate: popupTemplate,
+  renderer: {
+    type: "simple", // autocasts as new SimpleRenderer()
+    symbol: defaultSym,
+    label: "",
+    visualVariables: [
+      {
+        type: "color",
+        field: "tree",
+        legendOptions: {
+          title: "Number of Trees"
+        },
+        stops: [
+          {
+            value: 0,
+            color: " #ffe88c", // لون للقيمة الصفرية أو القيم الصغيرة
+            label: "0"
+          },
+          {
+            value: 10000,
+            color: "#4dbdb2", // لون للقيمة الوسطى
+            label: "10,000"
+          },
+          {
+            value: 50000,
+            color: "#ffe066", // لون للقيمة الوسطى
+            label: "50,000"
+          },
+          {
+            value: 100000,
+            color: "#ffdb4c", // لون للقيمة الوسطى
+            label: "100,000"
+          },
+          {
+            value: 500000,
+            color: "#ffd633", // لون للقيمة الوسطى
+            label: "500,000"
+          },
+          {
+            value: 1000000,
+            color: "#e69e1a", // لون للقيمة الوسطى
+            label: "1,000,000"
+          },
+          {
+            value: 5000000,
+            color: "#ff9900", // لون للقيمة العالية
+            label: "5,000,000"
+          }
+        ]
+      }
+    ]
+  }
+});
+
+map.add(featureLayer);
+
+
+let graphics;
+
+const layerView = await view.whenLayerView(featureLayer);
+
+reactiveUtils.when(
+  () => !layerView.updating,
+  async () => {
+    try {
+      const featureSet = await layerView.queryFeatures({
+        geometry: view.extent,
+        returnGeometry: true
+      });
+
+      graphics = featureSet.features;
+
+      const fragment = document.createDocumentFragment();
+
+      graphics.forEach((result, index) => {
+        const attributes = result.attributes;
+        const name = attributes.Prov_name;
+
+        const li = document.createElement("li");
+        li.classList.add("panel-result");
+        li.tabIndex = 0;
+        li.setAttribute("data-result-id", index);
+        li.textContent = name;
+
+        fragment.appendChild(li);
+      });
+
+      listNode.innerHTML = "";
+      listNode.appendChild(fragment);
+    } catch (error) {
+      console.error("Query failed: ", error);
+    }
+  }
+);
+
+const onListClickHandler = async (event) => {
+  const target = event.target;
+  const resultId = target.getAttribute("data-result-id");
+
+  const result = resultId && graphics && graphics[parseInt(resultId, 10)];
+
+  if (result) {
+    try {
+      await view.goTo(result.geometry.extent);
+      view.openPopup({ features: [result], location: result.geometry.centroid });
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        console.error(error);
+      }
+    }
+  }
+};
+
+listNode.addEventListener("click", onListClickHandler);
+
+
+      })();
+    });
+  </script>
+</body>
+</html>

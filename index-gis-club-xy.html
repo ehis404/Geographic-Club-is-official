@@ -1,0 +1,106 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>View padding | Sample | ArcGIS Maps SDK for JavaScript 4.29</title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #sidebar {
+        z-index: 99;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        width: 320px;
+      }
+
+      #text {
+        color: white;
+        padding: 3%;
+      }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.29/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.29/"></script>
+    <script>
+      require(["esri/Map", "esri/views/MapView","esri/Graphic","esri/widgets/BasemapGallery","esri/widgets/Expand"],
+      (Map, MapView,Graphic,BasemapGallery,Expand) => {
+        // Create the Map
+        const map = new Map({
+          basemap: "topo-vector"
+        });
+
+        // Create the view set the view padding to be 320 px from the right
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [46.616892115963516, 24.717358669981884], // Liberty Island, NY, USA
+          zoom: 16,
+          padding: {
+            right: 320 // Same value as the #sidebar width in CSS
+          }
+        });
+
+        const point ={
+          type: "point",
+          longitude: 46.616892115963516,
+          latitude: 24.717358669981884
+        };
+         
+        const markerSymbol = {
+  type: "simple-marker",
+  style: "diamond",
+  color: [0, 0, 255, 0.5], // اللون الأزرق مع الشفافية (RGBA)
+  outline: {
+    color: [255, 255, 255],
+    width: 1
+  },
+  size: 15 // حجم الرمز
+};
+
+        const pointGraphic = new Graphic({
+          geometry: point,
+          symbol: markerSymbol
+        });
+        view.graphics.add(pointGraphic);
+
+        view.ui.add(
+          [
+            new Expand({
+              content: new BasemapGallery({
+                view: view
+              }),
+              view: view,
+              expandIcon: "basemap",
+              group: "top-left"
+            })
+          ],
+          "top-left"
+        );
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv">
+      <div id="sidebar" class="esri-widget">
+        <div id="text">
+          <h1>Liberty Island</h1>
+          <p>
+            Note that setting the view.padding makes the view.center, view.extent etc work off a subsection of the full
+            view.
+          </p>
+          <p>Try to resize the window to get a better understanding.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
